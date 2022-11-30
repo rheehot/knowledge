@@ -36,3 +36,19 @@
       - HTTP Method의 갯수가 4개로 제한적이다.
 
 2.  SOAP API
+
+    - SOAP : Simple Object Access Protocol
+
+    - HTTP, HTTPS, SMTP 등을 통해 XML 기반의 메시지를 컴퓨터 네트워크 상에서 교환하는 프로토콜.
+
+    - REST API가 HTTP 프로토콜에 기반한다면, SOAP API는 그 자체로 프로토콜이다.
+
+    - 장점
+      - 표준 규약이 정확히 명시되어 있다.
+      - REST API에 비하여 훨씬 높은 보안성을 지닌다.
+        - 주로 은행, 기업용 어플리케이션 등 보안성이 중요한 곳에서 사용
+    - 단점
+      - REST API에 비하여 무겁고 느리다.
+      - 표준 규약이 정확히 명시되어 있기 때문에 반드시 지켜야 하며, REST API에 비하여 훨씬 어렵다.
+
+![차이점](https://velog.velcdn.com/images/cnffjd95/post/b824316b-c225-4984-93e5-de581139125b/image.png)
