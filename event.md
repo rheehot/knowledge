@@ -7,7 +7,7 @@
 - 이벤트를 처리한다는 것은 "사용자가 어떠한 행동을 하였을 때, 어떠한 결과물을 나타내"라고 하는 것.
 
 ```
-<button onCick={clickEventFunc}>클릭<button/>
+<button onCick={clickEventFunc}>클릭</button>
 
 . . .
 function clickEventFunc (){
@@ -20,3 +20,19 @@ function clickEventFunc (){
 - 예를 들면 위의 코드에서 "클릭"이라는 버튼을 누르면 clickEventFunc라는 함수가 실행되는데, 이 함수는 "클릭했음" 이라는 알림창을 띄워준다.
 
 - 즉, "클릭"이라는 **이벤트가 발생**하였을때, **"clickEventFunc"라는 함수로 하여금 이벤트 처리**를 지시하는 것이다.
+
+  > 이벤트 타겟 : 이벤트가 일어날 객체를 뜻한다
+
+- 이벤트 타입
+  - 클릭, 스크롤, 호버 등, 어떤 이벤트가 발생했는지를 뜻함.
+- **리액트에서 "div", "button", "input"등 DOM 요소에는 이벤트 등록이 가능하지만, 각각의 컴포넌트에는 등록이 불가하다.**
+  ```
+  function Component(){
+      return(
+          <div>
+              <Component name="컴포넌트"/>
+          </div>
+      )
+  };
+  ```
+  - **_이런 식으로 props 전달은 가능하지만, 이벤트 등록은 불가하다._**
