@@ -37,6 +37,22 @@ function clickEventFunc (){
   ```
   - **_이런 식으로 props 전달은 가능하지만, 이벤트 등록은 불가하다._**
 
+```
+function Component(){
+    const [inputValue, setInputValue] = useState("defaultValue");
+    const handleChange = (event) => {
+        setInputValue(event.target.value);
+    }
+	return (
+    	<div>
+        	<input onChange={hadleChange} defaultValue={inputValue} />
+        </div>
+    )
+}
+```
+
+- 또한 위의 코드처럼 이벤트 타겟 Element의 value를 State로써 저장이 가능하다.
+
 ### 기본동작 방지
 
 - 대부분의 이벤트는 브라우저에 의하여 자동으로 수행된다.
