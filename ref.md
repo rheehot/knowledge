@@ -1,6 +1,6 @@
 > 프론트엔드분야를 공부하며 생길수 있는 의문점과 가져야할 지식에 대하여 공부하는 바를 적은 글입니다.
 
-### 1. ref?
+## 1. ref?
 
 > **reference의 약자로, 리액트의 element가 참조하는 변수에 접근하여 제어가 가능하다.**
 
@@ -24,9 +24,11 @@
 
 - 하지만, ref는 state와 달리, 값이 변할때 리렌더링이 되지 않기 때문에, 전체 컴포넌트를 렌더링 시키지 않고, 내가 원하는 값만 변경하고 싶을때 사용한다.
 
-### 2. useRef
+## 2. useRef
 
 - 리액트의 함수형 컴포넌트에서 ref를 쉽게 사용 할 수 있게 하는 Hook이다.
+
+### 2 - 1. State와 Ref
 
 ```
 Code 1
@@ -68,7 +70,7 @@ import React, { useRef } from "react";
 const App = () => {
 	const countRef = useRef(0);
     const increaseCountRef = () => {
-    	countRef.current + 1;
+    	countRef.current += 1;
         console.log(`Ref : ${countRef.current}`);
     };
 
@@ -94,3 +96,52 @@ export default App;
 - 하지만 리렌더링이 일어나지 않더라도, `increaseRef` 함수 내부에 적혀있는 console.log에 의하여 변경되는 ref의 값을 알 수 있다
 
 > console.log(countRef)를 실행해 보면 **{current : 0}이라는 객체 값**을 얻을 수 있다. 우리가 필요한 것은 해당 객체의 **value 값**이므로, increaseRef의 실행 구문에 countRef.current로 작성한 것.
+
+### 2 - 2. 일반 변수와 Ref
+
+```
+Code 3
+
+import React, { useRef, useState } from "react";
+
+const App = () => {
+	const [render, setRender] = useState(0);
+   	const countRef = useRef(0);
+    let countVar = 0;
+
+    const increaseRef = () => {
+    	countRef.current += 1;
+        console.log(`countRef = ${countRef}`);
+    };
+
+    const increaseVar = () => {
+    	countVar += 1;
+        console.log(`countVar = ${countVar}`);
+    }
+
+    const doRendering = () => {
+    	serRender(render + 1);
+    }
+
+    return (
+    	<div>
+        	<p>Ref : {countRef}</p>
+            <p>Var : {countVar}</p>
+
+            <button onClick={doRendering}> Rendering </button>
+            <button onClick={increaseRef}> + Ref </button>
+            <button onClick={increaseVar}> + Var </button>
+        </div>
+    )
+}
+
+export default App;
+```
+
+- 우선 Code 3에 대한 설명을 간략하게 하자면, App 컴포넌트 내의 **일반변수 `countVar`**, **ref인 `countRef`**를 변경시켜주는 함수 increaseVar, increaseRef를 각각 선언한 뒤, **브라우저를 리렌더링 시켜줄 함수 `doRendering`**을 선언 해놨다.
+
+- Code 3을 실행 해 보면, 리렌더링이 되기 전, countVar, countRef는 1씩 증가하면서 잘 작동한다.
+
+- 하지만, doRendering함수가 실행된 후에는 countVar변수는 0으로 초기화 되고, countRef는 이전에 더해진 값이 그대로 유지된다.
+
+- **리렌더링이 일어나면, 컴포넌트(함수)의 모든 로직이 재실행되는데**, 이 과정에서 컴포넌트 내의 **일반 변수 countVar는 0으로 초기화**되지만, **ref는 그렇지 않고 이전의 값을 그대로 유지**한다.
