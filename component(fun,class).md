@@ -6,6 +6,8 @@
 
 - 내가 그동안 일반적으로 리액트를 사용하면서 사용한 컴포넌트들은 모두 함수형으로 되어있다.
 
+### 1 - 1. 선언 방식
+
 ```
 import React from "react";
 
@@ -21,7 +23,7 @@ function App({age}){
 export default App;
 ```
 
-### 특징
+### 1 - 1. 특징
 
 - State, LifeCycle 관련 기능 사용이 안되었지만, React Hook으로 사용이 가능하다.
 
@@ -35,17 +37,59 @@ export default App;
 
 ## 2. 클래스형 컴포넌트 (Class)
 
+### 2 - 1. 선언 방식
+
 ```
 import React, {Component} from "react";
 
 class App extends Component {
 	render(){
     	const name = "Class Component";
+        const {age} = this.props;
+
         return (
         	<div>
             	<p>{name}</p>
+                <p>{age}</p>
             </div>
         )
     }
 }
+```
+
+### 2 - 2. 특징
+
+- 클래스형 컴포넌트는 Component로 상속을 받아야 하고, render 메서드가 있어야 한다.
+
+- 함수형과 다르게 props 사용시, `this.props`를 통해 값을 사용할 수 있다.
+
+- construnctor라는 메서드가 존재하는데, 생성자로 props를 전달받아 state를 초기화 해야 할때 사용한다. (추후에 생명주기 메서드에 관해 좀 더 공부하고 정리 해야겠다.)
+
+```
+import React, {Component} from "react";
+
+class Test extends Component {
+	constructor(props){
+    	super(props);
+
+        this.state = {
+        	age : 20;
+        };
+    };
+    render () {
+    	const {age} = this.state;
+        return (
+        	<div>
+            	<p>{age}</p>
+                <button onClick={() => {
+                		this.setState({age : age + 1});
+                	}
+                }>
+                + 1
+                </button>
+            </div>
+        )
+    }
+}
+export default Test;
 ```
