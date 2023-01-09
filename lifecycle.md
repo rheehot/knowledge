@@ -29,7 +29,6 @@
 
   - 컴포넌트의 props로 받아온 값을 state에 넣을때 사용되는 메서드.
   - 컴포넌트가 렌더링 되기 전에 실행된다. (리렌더링때도 마찬가지)
-    - 해당 컴포넌트의 state나 객체를 선언할때 사용된다.
 
   ```
   getDerivedStateFromProps(props, state){}
@@ -109,19 +108,36 @@
 
 > 위에서 언급한 생명주기 메서드와 과정은 **클래스형 컴포넌트**의 경우이고, 함수형 컴포넌트의 경우 기능은 같지만 다른 방식으로 구현된다.
 
-### 2-1. 마운트
+### 2 - 1. 마운트
 
-- **constructor** 기능
+- **constructor**, **getDerivedStateFromProps**
+  - 클래스형 컴포넌트에서 constuctor 메서드가 수행하는 기능을 함수형 컴포넌트에선 **_컴포넌트 내부에서 수행_**한다.
+  - `useState`를 사용하여 state를 선언하고, 컴포넌트 내부에서 사용될 메서드를 선언한다.
+- **render**
 
-  - 클래스형 컴포넌트에서 constuctor 메서드가 수행하는 기능을 함수형 컴포넌트에선 컴포넌트 내부에서 수행한다.
-    - axios, fetch 등의 메서드를 이용해 해당 컴포넌트에서 요청하는 작업을 실행한다.
+  - 함수형 컴포넌트의 **_return_** 부분이 수행한다.
+  - return안에 작성된 JSX를 바탕으로 브라우저에 렌더링 한다.
+  - 위의 constructor 부분에서 선언한 state를 사용할 수 있다.
+    - 하지만 state를 변경하는 setState 메서드는 사용할 수 없다.
 
-  ```
-  import React, {useState} from "react";
+- **componentDidMount**
+  - 함수형 컴포넌트는 이 기능은 `useEffect`를 통하여 구현한다.
+  - 컴포넌트의 렌더링 이후 실행되는 메서드
+
+```
+  import React, {useState, useEffect} from "react";
 
   function App(){
+    /**
+     * 컴포넌트 호출 시 가장 먼저 호출이 되는 공간
+     * 이 공간에서 state, 컴포넌트 메서드들을 선언한다.
+     */
       const name = "함수형 컴포넌트";
       const [age, setAge] = useState(20);
+
+      useEffect(() => {
+      	console.log("렌더링 이후 수행된다.");
+      }, [])
 
       return (
           <div>
@@ -130,9 +146,95 @@
           </div>
       )
   }
-  ```
+export default App;
+```
 
-### 2-?. 요약
+### 2 - 2. 업데이트
+
+- **클래스형 컴포넌트의 모든 과정**
+  - 함수형 컴포넌트는 `useEffect`를 통하여 업데이트 과정의 모든 메서드를 대신한다.
+    - 컴포넌트 내부의 변화가 발생했을때 실행된다.
+    - props, 부모 컴포넌트의 리렌더링, 해당 컴포넌트 state의 변화 가 일어났을때 실행된다.
+
+```
+  import React, {useState, useEffect} from "react";
+
+  function App(props){
+      const [info, setInfo] = useState(
+      	{
+        	name : "업데이트 과정",
+            age : 20,
+            isOperate : false
+        }
+      );
+
+      useEffect(() => {
+      	console.log("인자로 들어간 props.data, info.name이 변경될때 리렌더링되며 수행된다.");
+      }, [props.data, info.name])
+
+      return (
+          <div>
+          </div>
+      )
+  }
+export default App;
+```
+
+### 2 - 3. 언마운트
+
+- **componentWillUnmount**
+  - 업데이트 과정과 동일하게 `useEffect` 메서드가 대신하여 수행한다.
+
+```
+App.js
+
+  import React, {useState, useEffect} from "react";
+  import unmountComponent from "./unmountComponent";
+
+  function App(props){
+
+      const [unmountState, setUnmountState] = useState(true);
+
+      const unmount = () => {
+      	setUnmountState(!unmountState);
+      };
+
+      return (
+          <div>
+          	<button onClick = {unmount}>제거</button>
+            {
+            	unmountState && (
+                	<unmountComponent />
+                )
+            }
+          </div>
+      )
+  }
+export default App;
+```
+
+```
+unmountComponent.js
+
+import React, {useState, useEffect} from "react";
+
+function unmountComponent(){
+	useEffect(() => {
+    	return () => {
+        	console.log("컴포넌트 언마운트");
+        }
+    }, [])
+	return (
+    	<div>언마운트 컴포넌트</div>
+    )
+}
+
+```
+
+- 위의 코드에서는 unmountComponent라는 컴포넌트를 불러와 App컴포넌트에서 사용중이다.
+- App 컴포넌트에서 unmountState의 상태에 따라 unmountComponent컴포넌트를 렌더링 또는 언마운트 하는 조건부 렌더링을 실시하고 있다. 이 경우 언마운트 사이클이 발생한다.
+
+### 2 - 3. 요약
 
 |      | 클래스형                                   | 함수형                                                                          |
 | ---- | ------------------------------------------ | ------------------------------------------------------------------------------- |
