@@ -1,7 +1,5 @@
 > 프론트엔드분야를 공부하며 생길수 있는 의문점과 가져야할 지식에 대하여 공부하는 바를 적은 글입니다.
 
-![react](https://velog.velcdn.com/images/cnffjd95/post/74975bdb-7603-49d5-9e50-a9c9d8329843/image.png)
-
 ## 1. 합성(Composition)?
 
 > 합성이란 여러개의 컴포넌트를 합쳐 새로운 컴포넌트를 만드는 것을 말한다.
