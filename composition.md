@@ -59,8 +59,13 @@ function WelcomeDialog() {
 - 이 경우에는, 별도로 props를 정의해서 원하는 컴포넌트에 넣어주면 된다.
 
 ```
+Code 3.
+
 function SplitPane(props) {
   return (
+      /**
+     * SplitPane이라는 컴포넌트를 생성하고, 각각 left, right라는 다른 props 속성을 정의하고, 들어갈 위치를 정한다.
+     */
     <div className="SplitPane">
       <div className="SplitPane-left">
         {props.left}
@@ -74,6 +79,9 @@ function SplitPane(props) {
 
 function App() {
   return (
+    /**
+     * 위에서 생성한 SplitPane이라는 컴포넌트의 props인 left, right에 각각 다른 내용을 전달한다.
+     */
     <SplitPane
       left={
         <Contacts />
@@ -84,3 +92,8 @@ function App() {
   );
 }
 ```
+
+- Code 3을 살펴보면, 먼저 SplitPane이라는 컴포넌트를 생성한다.
+- 이 컴포넌트는 각각 left, right라는 props를 받아와 사용한다. (각각의의 props가 표시될 위치는 다르다.)
+
+- App 컴포넌트에서는 이전에 생성한 SplitPane 컴포넌트를 사용하는데, left와 right라는 props에 표시될 내용(컴포넌트)을 전달시킨다.
