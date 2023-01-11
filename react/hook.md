@@ -108,3 +108,9 @@ export default Example;
 - 즉, Example 컴포넌트의 렌더링이 끝나고, count 상태가 정해진 후, 해당 컴포넌트의 title을 `You cliked {count} times`라고 바꾼다.
 
 - 사용자가 버튼을 몇 번 클릭함에 따라, 타이틀의 count의 숫자는 바뀌게 된다.
+
+---
+
+**_reference_**
+
+**리액트 공식 문서 ( https://ko.reactjs.org/ )**
