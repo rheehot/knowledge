@@ -63,3 +63,8 @@ Code 1.
 ```
 
 - Code 1의 HTML 문서가 서버로부터 응답 되었다고 가정하자.
+
+- 브라우저는 다음과 같은 과정을 통하여 문서를 파싱하여 DOM을 생성한다.
+  ![파싱](https://velog.velcdn.com/images/cnffjd95/post/0a5f975c-2717-486b-8d1a-2e7fedeef6cc/image.JPG)
+
+> **_DOM은 HTML 문서를 파싱했을때 생기는 결과이다._**
