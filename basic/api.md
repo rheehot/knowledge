@@ -34,6 +34,9 @@
     - 단점
       - REST API를 규정하는 표준 규약이 없다.
       - HTTP Method의 갯수가 4개로 제한적이다.
+    - RESTFUl
+      - 위에 서술한 REST의 원리를 따르는 것을 말한다.
+        - REST를 사용하면 모두 RESTFUL한 것이 아니라 REST API의 설계 규칙을 지켜야 한다. (URI 설정, API method 등)
 
 2.  SOAP API
 
