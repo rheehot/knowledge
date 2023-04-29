@@ -69,3 +69,43 @@ async function bootstrap(){
 }
 bootstrap();
 ```
+
+## Pipe를 이용한 유효성 체크
+
+### 필요 모듈
+
+```bash
+# class-validator
+npm install class-validator --save
+# class-transformer
+npm install class-transformer --save
+```
+
+### 파이프 생성하기
+
+src/boards/dto/create-board.dto.ts
+
+```bash
+import { IsNotEmpty } from 'class-validator';
+
+export class CreateBoardDto {
+  // 유효성 체크 추가
+  @IsNotEmpty()
+  title: string;
+
+  @IsNotEmpty()
+  description: string;
+}
+
+```
+
+src/boards/boards.controller.ts
+
+```bash
+@Post()
+  // 유효성 검사를 위한 핸들러 레벨 파이프
+  @UsePipes(ValidationPipe)
+  createBoard(@Body() createBoardDto: CreateBoardDto): Board {
+    return this.boardsService.createBoard(createBoardDto);
+  }
+```
