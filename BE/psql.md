@@ -175,3 +175,5 @@ postgres=# \list
 ```
 
 `create database db이름;`의 명령어로 새로운 데이터베이스를 생성할 수 있다.
+
+## Pgadmin
