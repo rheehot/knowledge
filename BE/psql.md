@@ -1,8 +1,6 @@
-![psql](https://velog.velcdn.com/images/cnffjd95/post/7837b4f6-4fd1-458e-8127-ff596d34783f/image.png)
-
 자주 사용되는 관계형 DBMS를 꼽으라 하면 mysql, postgresql이 있는데 내가 시청한 강의 영상에 사용된것이 바로 postgresql이기도 하고, 이전에 잠깐 사용해 본적이 있는 DBMS라 이번 기회에 상세하게 공부하고 사용해보려 한다.
 
-## 📌 Postgresql
+# 📌 Postgresql
 
 오픈소스 객체관계형 데이터베이스 시스템이다. 보통 ORDMBS이라고 부른다.
 다른 관계형 데이터베이스 시스템과 달리, 연산자, 복합 자료형, 자료형 변환자 등 데이터베이스 객체를 유저가 생성할 수 있는 기능을 제공한다.
@@ -12,7 +10,7 @@
   이 `template1 database`는 원본 데이터베이스로 인코딩이나 로케일 같은 설정을 담당한다.
   이것 외에 `template0 database`도 존재하는데, 이것은 `template1 database`의 원본과 같은 상태를 항상 유지하여 수정하지 않은 상태의 데이터 베이스를 생성한다.
 
-### 설치
+## 설치
 
 현재 나는 Mac m1칩을 사용하고 있다.
 먼저 homebrew를 이용하여 설치해보자
@@ -48,7 +46,9 @@ docker
 
 잘 설치되었으므로 이제 실행해볼 차례이다.
 
-### 실행 및 사용
+## 실행 및 사용
+
+### 실행 / 접속
 
 ```bash
 brew services start postgresql@15
@@ -66,6 +66,9 @@ postgres=#
 ```
 
 위와 같이 `postgres=#`이 뜬다면 접속에 성공한 것이다.
+
+### 유저 확인 / 추가 / 접속 / 삭제
+
 가장 먼저 현재 db의 유저를 확인한다.
 
 ```bash
@@ -138,6 +141,8 @@ postgres=# \du
 
 `drop user 사용자이름;`의 명령어를 사용하면 된다.
 
+### DB 조회, 생성
+
 이제 현재 생성되어있는 데이터베이스들을 확인해보자
 
 ```bash
@@ -176,4 +181,46 @@ postgres=# \list
 
 `create database db이름;`의 명령어로 새로운 데이터베이스를 생성할 수 있다.
 
-## Pgadmin
+### 테이블 조회, 컬럼 조회
+
+데이터베이스를 생성했다면 데이터베이스에 직접 접속하여 테이블을 조회해보자
+
+```bash
+postgres=# \c board_db
+You are now connected to database "board_db" as user "postgres".
+
+board_db=# \dt
+         List of relations
+ Schema | Name  | Type  |  Owner
+--------+-------+-------+----------
+ public | board | table | postgres
+(1 row)
+```
+
+`\c 데이터베이스이름` 의 명령어로 생성한 데이터베이스에 접속 할 수 있다.
+(그전에 현재 데이터베이스에 접속한 유저의 이름을 보여준다)
+이후, 데이터베이스 안에 생성된 테이블을 조회하려면 `\dt`의 명령어를 사용한다.
+
+생성된 테이블의 각 컬럼을 모두 조회하려면
+
+```bash
+board_db=# select * from board;
+ id |     title      | description
+----+----------------+-------------
+  1 | db 등록 테스트 | post 테스트
+(1 row)
+```
+
+`select * from 테이블 이름`의 명령어를 사용한다.
+`*`의 자리에는 조회할 컬럼의 이름을 입력한다
+위의 경우는 id, title, description이므로 title 컬럼만 조회하고 싶다면
+
+```bash
+board_db=# select title from board;
+     title
+----------------
+ db 등록 테스트
+(1 row)
+```
+
+처럼 입력하면 된다.
