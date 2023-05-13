@@ -73,5 +73,60 @@ Author-Table
 
 ### SQL
 
-관계형 데이터베이스 관리 시스템의 데이터를 관리 하기 위하여 사용되는 프로그래밍언어를 SQL이라고 한다.
-SQL에 관해서는 따로 포스팅을 할 예정이다.
+SQL(Structured Query Language)은 말 그대로 구조적 쿼리 언어로 관계형 데이터 베이스 시스템의 데이터들을 관리하기 위해 설계된 프로그래밍 언어이다.
+자료의 검색과 관리, DB 스키마 생성과 수정, DB객체 관리를 위해 사용된다.
+이 sql문은 크게 3가지로 나뉜다.
+
+- DDL (Data Definition Language)
+
+이름 그대로 DB 객체를 생성,삭제,변경하는 역할을 한다. 주로 DB 설계단계에서 사용된다.
+자주 쓰는 명령어로는 `CREATE`, `DROP`, `ALTER`가 있다.
+
+- DML (Data Manipulation Language)
+  DB를 조회, 삽입, 삭제, 변경하는 역할을 하며 주로 관리 목적으로 사용된다.
+  자주 쓰는 명령어로는 `SELECT`, `INSERT`, `UPDATE`등이 있다.
+
+- DCL (Data Conrtol Language)
+  사용자의 권한을 관리하는 역할을 한다.
+  주로 `GRANT`, `DENY`, `REVOKE`등이 있다.
+
+#### 규칙
+
+유저가 사용하는 DBMS에 따라 조금 상이한 부분이 있지만 일반적인 규칙은 이렇다.
+
+- 세미콜론
+
+명령이 끝나는 부분은 `;`으로 구분한다. 세미콜론 이전의 명령어가 몇줄이던 하나의 명령어로 인식한다.
+
+```bash
+SELECT * FROM Table;
+
+SELECT *
+FROM Table;
+```
+
+- 주석
+  우리가 알고 있는 그 주석이다
+  단일라인의 주석과 여러라인의 주석사용법이 다르다
+
+```bash
+-- SELECT TEST 단일라인 주석
+SELECT * FROM Table;
+```
+
+```bash
+/*
+SELECT * FROM Table
+여러 라인을 주석한다.
+*/
+SELECT * FROM Table;
+```
+
+- 대소문자
+  sql은 문자열을 제외하고는 대소문자를 가리지 않는다. 하지만 주로 가독성을 위해 대소문자를 구분하여 사용한다.
+
+```bash
+SELECT * FROM Table;
+
+Select * from table;
+```
