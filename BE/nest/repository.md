@@ -199,3 +199,9 @@ Nest can't resolve dependencies of the UsersService (?). Please make sure that t
 ```
 
 와 같은 의존성 에러가 발생한다. 반드시 module에 생성한 repository를 등록하자.
+
+---
+
+**reference**
+[Nest js 공식 문서](https://docs.nestjs.com/techniques/database)
+[Type Orm 공식 문서](https://typeorm.io/)
