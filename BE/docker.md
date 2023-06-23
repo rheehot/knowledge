@@ -36,3 +36,9 @@ Docker에서 말하는 이미지란 소프트웨어 실행에 필요한 코드, 
 ![](https://velog.velcdn.com/images/cnffjd95/post/2ff57fd1-6ab7-44bc-8c0e-cd2873963433/image.png)
 
 위에 설명한 컨테이너의 정의대로 다시 Docker를 설명하자면, **소프트웨어의 실행환경을 Image라고 하는 개념으로 규격화 하여 실행한 컨테이너 기반 오픈소스 가상화 플랫폼**이라고 할 수 있다.
+
+---
+
+reference
+
+- Docker up & running
