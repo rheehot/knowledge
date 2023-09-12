@@ -1,5 +1,9 @@
 ## 플로이드 워셜 알고리즘
 
+### 관련문제
+
+**[백준 1058 - 친구](https://github.com/augusstt06/Baekjoon/blob/main/%EB%B0%B1%EC%A4%80/Silver/1058.%E2%80%85%EC%B9%9C%EA%B5%AC/%EC%B9%9C%EA%B5%AC.py)**
+
 모든 지점에서 다른 모든 지점까지의 최단 경로를 모두 구해야 하는 경우에 사용하는 알고리즘이다.
 
 > 그래프에서 모든 정점 사이의 최단거리<hr/>
