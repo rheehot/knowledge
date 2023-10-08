@@ -1,4 +1,4 @@
-![Alt text](image.png)
+![](https://velog.velcdn.com/images/cnffjd95/post/161ceaea-b99b-46b9-8a4d-3aed73562ba3/image.webp)
 
 대부분의 프로젝트를 진행하면서 자바스크립트보단 타입스크립트를 많이 사용하게 되는데 문법상으로 사용하고 있긴 하나 정확히 어떤역할인지, 기존의 자바스크립트와 무엇이 다른지 잘 모르고 사용하는 경우가 대부분이다. 앞으로 하나하나 공부해보려고 한다.
 
