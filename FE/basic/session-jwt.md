@@ -59,7 +59,15 @@ JWT는 헤더, 페이로드, 시그니처 부분으로 나뉜다.
 하지만 결국 JWT도 토큰 탈취의 위험으로부터 자유로울수 없기 때문에, `Access Token`, `Refresh Token` 을 사용하는 방식을 주로 사용한다.
 
 **`Access Token`** 은 클라이언트가 가지고 있는 토큰이다. 여기에는 실제 유저의 정보가 들어있는데, 서버에서는 **요청을 받으면 이 토큰을 이용하여 응답을 진행한다.**
-그런데 만약 Access Token이 탈취된다면 해당 토큰이 만료될때까지 권한이 부여되는 문제가 있다. 하지만 이것으로 인하여 만료기간이 짧아져 버린다면 사용자 입장에서는 사용자 인증을 계속해야 하는 불편함이 생길수밖에 없다.
+그런데 만약 Access Token이 XSS나 CSRF공격으로 인해 탈취된다면 해당 토큰이 만료될때까지 권한이 부여되는 문제가 있다. 하지만 이것으로 인하여 만료기간이 짧아져 버린다면 사용자 입장에서는 사용자 인증을 계속해야 하는 불편함이 생길수밖에 없다.
+
+> **XSS (Cross Site Scriping)** : 사용자가 특정 스크립트를 강제로 실행하도록 유도하여 액세스 토큰을 탈취하는 공격법. Stored Xss와 Reflected Xss로 나뉜다. 클라이언트 측에서 악성코드가 실행된다.
+> 사용자가 사이트를 신뢰하여 발생함.
+> ![](https://velog.velcdn.com/images/cnffjd95/post/06cdbaba-d6aa-4fbe-a1b6-8f75d7ac53bf/image.png)
+
+> **CSRF (Cross-site Request Forgery)** : 사이트간의 요청을 위조하는것. 공격자가 의도한 행동 (서버에 req를 보내는 행동 - 등록, 수정 등)을 사이트에 요청하게 하는 공격법. 요청받은 서버측에서 악성코드가 실행된다.
+> 사이트가 사용자를 신뢰하여 발생함
+> ![](https://velog.velcdn.com/images/cnffjd95/post/91a1d6d4-f9bc-4427-8e11-a740fd286d23/image.png)
 
 이러한 문제를 해결하기 위해서 사용되는것이`Refresh Token`이다.
 **`Refresh Token`**은 새로운 Access Token을 발급하기 위해 사용한다. Access Token은 짧은 수명을 가지고 있기 때문에 **만료된 토큰을 새롭게 발급하기 위해 사용되는 토큰이다.**
