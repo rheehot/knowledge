@@ -1,5 +1,3 @@
-최근 프로젝트에 리덕스를 도입하려고 하는데 "꼭 리덕스를 사용해야하나? 리액트면 context api도 사용이 가능할텐데"라는 생각이 들어 context api를 알아보려고 한다.
-
 ### Context api
 
 context api는 리액트의 단방향 데이터 흐름으로 인한 props drilling을 해결하기 위해 개발된 내장 라이브러리이다.
